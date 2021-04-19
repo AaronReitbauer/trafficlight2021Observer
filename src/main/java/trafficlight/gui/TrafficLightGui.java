@@ -2,6 +2,7 @@ package trafficlight.gui;
 
 import trafficlight.ctrl.TrafficLightCtrl;
 
+import javax.security.auth.Subject;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,10 +30,19 @@ public class TrafficLightGui extends JFrame implements ActionListener {
         init();
     }
 
-    private void initLights(TrafficLightCtrl ctrl) {
+    private void initLights(TrafficLightCtrl ctrl)  {
         //TODO implement a part of the pattern here
         //create the TrafficLight
-        //connect subject and observer
+        //connect subject and observer !1. Step
+        //erstellen Lampe, holen State aus Controller und verbinden
+        green = new TrafficLight(Color.green);
+        red = new TrafficLight(Color.red);
+        yellow = new TrafficLight(Color.yellow);
+
+        ctrl.getGreenState().addObserver(green);
+        ctrl.getRedState().addObserver(red);
+        ctrl.getYellowState().addObserver(yellow);
+
     }
 
     private void init() {
@@ -67,4 +77,5 @@ public class TrafficLightGui extends JFrame implements ActionListener {
            trafficLightCtrl.stop();
         }
     }
+
 }
